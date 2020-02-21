@@ -3,3 +3,19 @@
 
 #include "pch.h"
 #include "BackroundCyclerV6.h"
+
+wxIMPLEMENT_APP(AppStart);
+
+AppStart::AppStart()
+{
+	this->mainWindow = new SettingsWindow("Structured Test setup", wxPoint(50, 50), 
+		wxSize(800, 600));
+}
+
+AppStart::~AppStart() {}
+
+bool AppStart::OnInit()
+{
+	mainWindow->Show();
+	return true;
+}
