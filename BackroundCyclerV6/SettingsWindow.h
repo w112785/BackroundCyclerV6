@@ -5,6 +5,16 @@ enum
 	ID_Hello = wxID_HIGHEST + 1
 };
 
+class AppStart : public wxApp
+{
+public:
+	AppStart();
+	~AppStart() override;
+	bool OnInit() override;
+private:
+	SettingsWindow* mainWindow;
+};
+
 class SettingsWindow : public wxFrame
 {
 public:
