@@ -8,13 +8,15 @@
 #define PCH_H
 #define _CRT_SECURE_NO_WARNINGS
 #include "targetver.h"
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+#include <wx/wx.h>
 // Windows Header Files
 #include <windows.h> // We are going to need some System Calls in this Header.
 					 // Even though we are going to be using wxWidgets we still need access
 					 // to SystemParametersInfo
-
-#include <wx/wx.h>
+#endif 
 
 
 #endif //PCH_H

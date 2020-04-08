@@ -2,7 +2,7 @@
 #include "pch.h"
 enum
 {
-	ID_Hello = 1
+	ID_Hello = wxID_HIGHEST + 1
 };
 
 class SettingsWindow : public wxFrame

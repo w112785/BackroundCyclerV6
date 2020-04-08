@@ -7,7 +7,7 @@ wxBEGIN_EVENT_TABLE(SettingsWindow, wxFrame)
 	EVT_MENU(wxID_ABOUT, SettingsWindow::OnAbout)
 wxEND_EVENT_TABLE()
 
-SettingsWindow::SettingsWindow(const wxString& title, const wxPoint& pos, const wxSize& size) 
+SettingsWindow::SettingsWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
 		: wxFrame(nullptr, wxID_ANY, title, pos, size) 
 {
 	wxMenu* menuFile = new wxMenu;
