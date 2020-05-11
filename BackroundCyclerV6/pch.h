@@ -7,7 +7,7 @@
 #ifndef PCH_H
 #define PCH_H
 #define _CRT_SECURE_NO_WARNINGS
-#include "targetver.h"
+#include "targetver.hpp"
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
@@ -16,7 +16,8 @@
 #include <windows.h> // We are going to need some System Calls in this Header.
 					 // Even though we are going to be using wxWidgets we still need access
 					 // to SystemParametersInfo
-#endif 
+#endif //WX_PRECOMP
+#include <wx/listbook.h>
 
 
 #endif //PCH_H

@@ -1,45 +1,48 @@
 #include "pch.h"
-#include "SettingsWindow.h"
-
-wxBEGIN_EVENT_TABLE(SettingsWindow, wxFrame)
-	EVT_MENU(ID_Hello, SettingsWindow::OnHello)
-	EVT_MENU(wxID_EXIT, SettingsWindow::OnExit)
-	EVT_MENU(wxID_ABOUT, SettingsWindow::OnAbout)
-wxEND_EVENT_TABLE()
+#include "SettingsWindow.hpp"
 
 SettingsWindow::SettingsWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
-		: wxFrame(nullptr, wxID_ANY, title, pos, size) 
+		: wxFrame(nullptr, MAINWINDOW, title, pos, size) 
 {
-	wxMenu* menuFile = new wxMenu;
-	menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
-		"Help string shown in status bar for this menu item");
-	menuFile->AppendSeparator();
-	menuFile->Append(wxID_EXIT);
-	wxMenu* menuHelp = new wxMenu;
-	menuHelp->Append(wxID_ABOUT);
-	wxMenuBar* menuBar = new wxMenuBar;
-	menuBar->Append(menuFile, "&File");
-	menuBar->Append(menuHelp, "&Help");
-	SetMenuBar(menuBar);
-	CreateStatusBar();
-	SetStatusText("Welcome to wxWidgets!");
+	wxBoxSizer* bSizer = new wxBoxSizer(wxHORIZONTAL);
+	this->MenuBarSetup();
+
+	this->SetSizeHints(wxDefaultSize, wxDefaultSize, wxDefaultSize);
+	this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(SettingsWindow::OnCloseWindow));
+	this->Connect(ToolBarId::TB_CLOSE, wxEVT_COMMAND_TOOL_CLICKED, 
+		wxCommandEventHandler(SettingsWindow::OnExit));
 }
 
-SettingsWindow::~SettingsWindow() {}
+SettingsWindow::~SettingsWindow()
+{
+
+}
 
 void SettingsWindow::OnExit(wxCommandEvent& event)
 {
 	Close(true);
 }
 
-void SettingsWindow::OnAbout(wxCommandEvent& event)
+void SettingsWindow::OnCloseWindow(wxCloseEvent& event)
 {
-	wxMessageBox(wxT("This is a wxWidgets' Hello world sample"),
-		wxT("About Hello World"), wxOK | wxICON_INFORMATION);
+	event.Skip();
 }
 
-void SettingsWindow::OnHello(wxCommandEvent& event)
+void SettingsWindow::MenuBarSetup()
 {
-	wxMessageBox(wxT("Hello World from wxWidgets!"),
-		wxT("Backround Cycler V6 C++ edition"), wxOK | wxICON_EXCLAMATION);
+	toolBar = this->CreateToolBar(
+		/*wxTB_FLAT |*/ wxTB_HORIZONTAL | wxTB_HORZ_LAYOUT | wxTB_TEXT | wxTB_NOICONS,
+		MW_TOOLBAR);
+	TB_ChangeBackground = toolBar->AddTool(TB_CHANGEBG, wxT("Change Background"),
+		wxNullBitmap, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, nullptr);
+
+	toolBar->AddSeparator();
+
+	TB_CloseWindow = toolBar->AddTool(TB_CLOSE, wxT("Close Window"),
+		wxNullBitmap, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, nullptr);
+
+	TB_QuitProgram = toolBar->AddTool(TB_QUIT, wxT("Quit Program"),
+		wxNullBitmap, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, nullptr);
+
+	toolBar->Realize();
 }

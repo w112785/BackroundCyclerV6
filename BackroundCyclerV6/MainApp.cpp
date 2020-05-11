@@ -2,7 +2,7 @@
 //
 
 #include "pch.h"
-#include "SettingsWindow.h"
+#include "SettingsWindow.hpp"
 
 wxIMPLEMENT_APP(AppStart);
 
